@@ -3,122 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rxhimislmn | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>rxhimislmn | Creative Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        /* SAYA LETAK SEMUA STYLE KAT SINI SUPAYA TAK KACAU FAIL STYLE.CSS LAMA */
-        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; }
-        .hero-section { text-align: center; padding: 60px 20px; }
-        .hero-title { font-size: 3rem; font-weight: 800; margin: 0; }
-        
-        .nav-container { display: flex; justify-content: center; gap: 50px; padding: 30px; border: 1px solid #eee; border-radius: 20px 20px 0 0; max-width: 900px; margin: 0 auto; }
-        
-        .icon-btn { cursor: pointer; text-align: center; transition: 0.3s; padding: 10px; min-width: 80px; }
-        .icon-btn i { font-size: 28px; display: block; margin-bottom: 10px; color: #000; }
-        .icon-btn span { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #000; }
-        .icon-btn:hover { transform: translateY(-5px); }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background: #fff; 
+            color: #000;
+            line-height: 1.6;
+        }
 
-        #black-drawer { 
-            background: #111; 
+        /* Hero Section */
+        .hero-section { 
+            padding: 120px 20px 60px; 
+            text-align: center; 
+        }
+        .hero-title { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+        }
+        .hero-subtitle {
+            font-size: 1rem;
+            color: #666;
+            font-weight: 300;
+        }
+
+        /* Navigation Minimalis (Teks Sahaja) */
+        .nav-categories { 
+            display: flex; 
+            justify-content: center; 
+            gap: 60px; 
+            padding: 40px 20px;
+            border-top: 1px solid #eee;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .category-text { 
+            cursor: pointer; 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            letter-spacing: 2px; 
+            transition: 0.3s;
+            color: #888;
+            padding-bottom: 5px;
+        }
+        .category-text:hover, .category-text.active { 
+            color: #000;
+            border-bottom: 2px solid #000;
+        }
+
+        /* Content Drawer */
+        #content-drawer { 
+            background: #fcfcfc; 
             max-height: 0; 
             overflow: hidden; 
-            transition: max-height 0.5s ease-out; 
-            max-width: 922px; 
-            margin: 0 auto; 
-            border-radius: 0 0 20px 20px;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid #eee;
         }
-        .content-padding { padding: 40px; color: white; }
-        .tab-content { display: none; text-align: center; }
-        
-        .work-grid { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-        .card { background: #000; color: white; border-radius: 20px; overflow: hidden; padding: 20px; }
-        img, video { width: 100%; border-radius: 10px; }
+        .drawer-inner { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
+        .tab-panel { display: none; opacity: 0; transition: opacity 0.4s; }
+        .tab-panel.show { display: block; opacity: 1; }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .gallery-grid img, .gallery-grid video {
+            width: 100%;
+            display: block;
+            border-radius: 4px;
+        }
+
+        /* Footer Professional */
+        footer {
+            padding: 100px 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+            margin-top: 50px;
+        }
+        .copyright {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            color: #999;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <header class="hero-section">
         <h1 class="hero-title">rxhimislmn.</h1>
-        <p>Videographer, Animator & Digital Artist</p>
+        <p class="hero-subtitle">Videographer, Animator & Digital Artist</p>
     </header>
 
-    <div class="nav-container">
-        <div class="icon-btn" onclick="openMe('vids')">
-            <i class="fa-solid fa-video"></i>
-            <span>VIDEO</span>
-        </div>
-        <div class="icon-btn" onclick="openMe('pics')">
-            <i class="fa-solid fa-camera"></i>
-            <span>PHOTO</span>
-        </div>
-        <div class="icon-btn" onclick="openMe('arts')">
-            <i class="fa-solid fa-palette"></i>
-            <span>ARTS</span>
-        </div>
-        <div class="icon-btn" onclick="openMe('mots')">
-            <i class="fa-solid fa-rocket"></i>
-            <span>MOTION</span>
-        </div>
-    </div>
+    <nav class="nav-categories">
+        <div class="category-text" onclick="toggleWork('video', this)">VIDEO</div>
+        <div class="category-text" onclick="toggleWork('photo', this)">PHOTO</div>
+        <div class="category-text" onclick="toggleWork('arts', this)">ARTS</div>
+        <div class="category-text" onclick="toggleWork('motion', this)">MOTION</div>
+    </nav>
 
-    <div id="black-drawer">
-        <div class="content-padding">
+    <div id="content-drawer">
+        <div class="drawer-inner">
             
-            <div id="vids" class="tab-content">
-                <h3>📽️ VIDEO WORKS</h3>
-                <video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+            <div id="video" class="tab-panel">
+                <div class="gallery-grid">
+                    <video controls>
+                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
 
-            <div id="pics" class="tab-content">
-                <h3>📸 PHOTOGRAPHY</h3>
-                <img src="redonebuilding.png">
+            <div id="photo" class="tab-panel">
+                <div class="gallery-grid">
+                    <img src="redonebuilding.png" alt="Photography">
+                </div>
             </div>
 
-            <div id="arts" class="tab-content">
-                <h3>🎨 DIGITAL ARTS</h3>
-                <img src="poster1.jpg"> 
+            <div id="arts" class="tab-panel">
+                <div class="gallery-grid">
+                    <img src="nama-poster-anda.jpg" alt="Digital Arts">
+                </div>
             </div>
 
-            <div id="mots" class="tab-content">
-                <h3>🚀 MOTION GRAPHICS</h3>
-                <p>Coming Soon...</p>
+            <div id="motion" class="tab-panel">
+                <p style="text-align: center; color: #999; font-size: 0.8rem;">MOTION PROJECTS COMING SOON</p>
             </div>
 
         </div>
     </div>
 
-    <section class="work-grid">
-        <div class="card">
-            <p style="font-size: 12px; color: #888;">FEATURED WORK</p>
-            <h2>Showreel 2024</h2>
-            <video autoplay loop muted playsinline>
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
+    <footer>
+        <div class="copyright">
+            © 2026 RXHIMISLMN. ALL RIGHTS RESERVED.
         </div>
-    </section>
+    </footer>
 
     <script>
-        function openMe(id) {
-            var drawer = document.getElementById('black-drawer');
-            var target = document.getElementById(id);
-            var all = document.getElementsByClassName('tab-content');
+        function toggleWork(id, element) {
+            const drawer = document.getElementById('content-drawer');
+            const target = document.getElementById(id);
+            const allPanels = document.querySelectorAll('.tab-panel');
+            const allBtns = document.querySelectorAll('.category-text');
 
-            // Kalau tab tu dah terbuka, kita tutup laci
-            if (target.style.display === "block") {
+            // Jika klik pada yang sudah aktif, tutup drawer
+            if (element.classList.contains('active')) {
                 drawer.style.maxHeight = "0";
-                setTimeout(function(){ target.style.display = "none"; }, 500);
+                element.classList.remove('active');
+                setTimeout(() => { target.classList.remove('show'); }, 600);
             } 
-            // Kalau belum terbuka
             else {
-                // Sembunyikan semua content dulu
-                for (var i = 0; i < all.length; i++) {
-                    all[i].style.display = "none";
-                }
-                // Tunjukkan content yang kita nak
-                target.style.display = "block";
-                // Buka laci
-                drawer.style.maxHeight = "1000px";
+                // Reset semua
+                allBtns.forEach(btn => btn.classList.remove('active'));
+                allPanels.forEach(panel => panel.classList.remove('show'));
+
+                // Aktifkan yang baru
+                element.classList.add('active');
+                target.classList.add('show');
+                
+                // Buka laci (Auto height)
+                drawer.style.maxHeight = "2000px";
             }
         }
     </script>

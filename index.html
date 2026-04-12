@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rxhimislmn | Creative Powerhouse</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
+        /* CSS ASAS & STABIL */
         :root { --bg: #ffffff; --text: #000000; }
-        * { box-sizing: border-box; cursor: none; } /* Kita guna custom cursor nanti */
+        * { box-sizing: border-box; } 
         
         body { 
             font-family: 'Inter', sans-serif; 
@@ -17,116 +17,187 @@
             background: var(--bg); 
             color: var(--text); 
             overflow-x: hidden;
-            transition: background 0.5s ease;
+            line-height: 1.5;
         }
 
-        /* CUSTOM CURSOR (Macam BikeBear) */
-        #cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: rgba(0,0,0,0.8);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            mix-blend-mode: difference; /* Warna cursor berubah ikut background */
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 30px; }
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 50px; }
-
-        /* HEADER SECTION */
-        header { padding: 120px 0 80px; }
-        .brand { font-size: 18px; font-weight: 900; letter-spacing: 2px; margin-bottom: 40px; }
+        /* HEADER & TAJUK GERGASI (BIKEBEAR VIBES) */
+        header { padding: 80px 0 40px; }
+        .brand { font-size: 16px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px; }
         
         .huge-title { 
-            font-size: clamp(3.5rem, 10vw, 8rem); 
+            font-size: clamp(3rem, 9vw, 6.5rem); /* Teks besar tapi responsif */
             font-weight: 900; 
-            line-height: 0.85; 
-            letter-spacing: -5px; 
+            line-height: 0.9; 
+            letter-spacing: -3px; 
             text-transform: uppercase;
+            margin: 0;
         }
 
-        /* ABOUT ME (STORY) */
+        /* ABOUT ME (DIBAGI 2 KOLUM) */
         .intro-section { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 100px; 
-            margin-bottom: 150px;
-            padding-top: 60px;
-            border-top: 10px solid #000;
+            display: flex; gap: 60px; flex-wrap: wrap;
+            margin: 60px 0 100px; 
+            padding-top: 40px;
+            border-top: 8px solid #000;
         }
         
-        .intro-left h2 { font-size: 32px; font-weight: 900; text-transform: uppercase; }
-        .intro-right p { font-size: 1.4rem; line-height: 1.3; font-weight: 400; margin-bottom: 40px; }
+        .intro-left { flex: 1; min-width: 280px; }
+        .intro-right { flex: 1.5; min-width: 300px; }
 
-        /* WORK NAV (TABS) */
-        .work-nav { margin: 150px 0 30px; border-bottom: 2px solid #eee; }
+        .intro-left h2 { font-size: 28px; font-weight: 900; text-transform: uppercase; margin-top: 0; }
+        .intro-right p { font-size: 1.15rem; color: #333; margin-bottom: 25px; text-align: justify; }
+
+        /* NAVIGASI KERJA (Teks Besar & Boleh Klik) */
+        .work-nav { margin: 80px 0 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .nav-item { 
-            font-size: clamp(2rem, 6vw, 5rem); 
+            font-size: clamp(2rem, 5vw, 3.5rem); 
             font-weight: 900; 
             color: #ddd; 
-            transition: 0.4s; 
+            transition: 0.3s; 
             display: inline-block; 
-            margin-right: 50px; 
+            margin-right: 40px; 
             text-transform: uppercase;
             text-decoration: none;
-            padding-bottom: 10px;
+            cursor: pointer;
         }
-        .nav-item:hover, .nav-item.active { color: #000; letter-spacing: 5px; }
+        /* Kesan Hover & Aktif */
+        .nav-item:hover, .nav-item.active { color: #000; letter-spacing: 3px; }
 
-        /* DISPLAY BOX (DRAWER) */
-        #drawer { 
-            max-height: 0; 
+        /* LACI HITAM (DRAWER) */
+        #work-drawer { 
+            max-height: 0; /* Tertutup asal */
             overflow: hidden; 
-            transition: max-height 1s cubic-bezier(0.86, 0, 0.07, 1);
+            transition: max-height 0.8s ease-out; /* Pergerakan buka yang smooth */
             background: #000;
             color: #fff;
+            border-radius: 8px;
         }
-        .drawer-content { padding: 100px 50px; }
+        .drawer-inner { padding: 60px 30px; }
+        .panel { display: none; } /* Semua panel content sembunyi asal */
+        .panel.show { display: block; } /* Tunjuk bila aktif */
 
-        /* GALLERY */
-        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
-        img, video { width: 100%; filter: grayscale(100%); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
-        img:hover, video:hover { filter: grayscale(0%); transform: scale(1.05); }
+        /* GALERI GRID */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        img, video { width: 100%; border-radius: 4px; filter: grayscale(100%); transition: 0.5s; }
+        img:hover { filter: grayscale(0%); transform: scale(1.02); }
 
         /* FOOTER */
         footer { 
-            padding: 100px 0; 
+            padding: 80px 0 40px; 
+            border-top: 8px solid #000; 
             display: flex; 
             justify-content: space-between;
             font-weight: 900;
             text-transform: uppercase;
-            font-size: 14px;
-            border-top: 10px solid #000;
+            font-size: 12px;
+            color: #777;
         }
 
+        /* RESPONSIVE UNTUK PHONE */
         @media (max-width: 768px) {
-            .intro-section { grid-template-columns: 1fr; gap: 50px; }
-            * { cursor: auto; } #cursor { display: none; }
+            .nav-item { margin-right: 20px; }
+            header { padding-top: 50px; }
         }
     </style>
 </head>
 <body>
 
-    <div id="cursor"></div>
-
     <div class="container">
-        <header data-aos="fade-up">
+        <header>
             <div class="brand">RXHIMISLMN.</div>
             <h1 class="huge-title">CREATIVE<br>FORCE.</h1>
         </header>
 
-        <section class="intro-section" data-aos="fade-up" data-aos-delay="200">
+        <section class="intro-section">
             <div class="intro-left">
                 <h2>Ahmad Rahimi</h2>
-                <p>Graduan Teknologi Kreatif UMK</p>
+                <p style="color:#666; font-size:0.9rem;">Graduan Teknologi Kreatif UMK (Filem & Skrin)</p>
             </div>
             <div class="intro-right">
-                <p>Lulusan Pengajian Skrin & Filem yang membawa magis ke dalam setiap frame fotografi, suntingan video, dan motion grafik.</p>
-                <p>Berasaskan dedikasi dan minat yang mendalam dalam seni visual.</p>
+                <p>
+                    Lulusan Pengajian Skrin & Filem yang membawa magis ke dalam setiap frame fotografi, suntingan video, dan motion grafik perkahwinan.
+                </p>
+                <p>
+                    Berasaskan dedikasi dan minat yang mendalam dalam seni visual, suntingan video/gambar, serta melukis.
+                </p>
             </div>
         </section>
 
-        <nav class="work-nav" data-aos="fade-up">
-            <a href="javascript:void(0)" class="nav-item" onclick="toggleWork('v',
+        <nav class="work-nav">
+            <a class="nav-item" onclick="viewWork('v', this)">Films</a>
+            <a class="nav-item" onclick="viewWork('p', this)">Photos</a>
+            <a class="nav-item" onclick="viewWork('a', this)">Arts</a>
+        </nav>
+
+        <div id="work-drawer">
+            <div class="drawer-inner">
+                
+                <div id="v" class="panel">
+                    <h3>📽️ FILMS</h3>
+                    <div class="gallery-grid">
+                        <video controls muted><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
+                    </div>
+                </div>
+
+                <div id="p" class="panel">
+                    <h3>📸 PHOTOS</h3>
+                    <div class="gallery-grid">
+                        <img src="redonebuilding.png" alt="Photography">
+                    </div>
+                </div>
+
+                <div id="a" class="panel">
+                    <h3>🎨 ARTS</h3>
+                    <p style="text-align:center;">Digital Arts Coming Soon</p>
+                </div>
+
+            </div>
+        </div>
+
+        <footer>
+            <div>BASED IN MALAYSIA</div>
+            <div>© 2026 RXHIMISLMN</div>
+            <div>SAY HELLO</div>
+        </footer>
+    </div>
+
+    <script>
+        function viewWork(id, btn) {
+            const drawer = document.getElementById('work-drawer');
+            const targetPanel = document.getElementById(id);
+            const allPanels = document.querySelectorAll('.panel');
+            const allNavItems = document.querySelectorAll('.nav-item');
+
+            // JIKA BUTANG YANG SAMA DIKLIK (UNTUK TUTUP)
+            if(btn.classList.contains('active')) {
+                drawer.style.maxHeight = "0"; // Tutup laci
+                btn.classList.remove('active'); // Buang warna hitam kat menu
+                
+                // Tunggu laci tutup (0.8s) baru sorok content dalam dia
+                setTimeout(() => { targetPanel.classList.remove('show'); }, 800);
+            } 
+            // JIKA BUTANG BARU DIKLIK (UNTUK BUKA ATAU TUKAR)
+            else {
+                // 1. Sembunyikan semua content lama dulu
+                allNavItems.forEach(item => item.classList.remove('active'));
+                allPanels.forEach(panel => panel.classList.remove('show'));
+                
+                // 2. Tunjukkan butang & panel yang baru diklik
+                btn.classList.add('active');
+                targetPanel.classList.add('show');
+                
+                // 3. Buka laci dengan ketinggian yang cukup
+                drawer.style.maxHeight = "1500px"; 
+                
+                // 4. Skrol ke laci secara automatik supaya nampak content
+                setTimeout(() => {
+                    drawer.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+    </script>
+
+</body>
+</html>

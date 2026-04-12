@@ -4,170 +4,140 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rxhimislmn | Creative Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            margin: 0; 
-            background: #fff; 
-            color: #000;
-            line-height: 1.6;
-        }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; color: #000; line-height: 1.8; }
+        
+        /* Layout Utama */
+        .container { max-width: 800px; margin: 0 auto; padding: 0 25px; }
 
-        /* Hero Section */
-        .hero-section { 
-            padding: 120px 20px 60px; 
-            text-align: center; 
-        }
-        .hero-title { 
-            font-size: 2.5rem; 
-            font-weight: 700; 
-            letter-spacing: -1px;
-            margin-bottom: 10px;
-        }
-        .hero-subtitle {
-            font-size: 1rem;
-            color: #666;
-            font-weight: 300;
-        }
+        /* Header & About Me */
+        .header-section { padding: 100px 0 60px; text-align: left; }
+        .hero-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin: 0 0 30px 0; }
+        
+        .about-text-area { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 50px; }
+        .profile-pic { width: 150px; height: 150px; border-radius: 15px; object-fit: cover; filter: grayscale(100%); }
+        .bio-content { flex: 1; min-width: 300px; }
+        .bio-content p { font-size: 0.95rem; color: #333; margin: 0 0 15px 0; }
+        .name-bold { font-weight: 700; color: #000; }
 
-        /* Navigation Minimalis (Teks Sahaja) */
-        .nav-categories { 
+        /* Navigation Kerja */
+        .work-nav { 
             display: flex; 
-            justify-content: center; 
-            gap: 60px; 
-            padding: 40px 20px;
-            border-top: 1px solid #eee;
-            max-width: 800px;
-            margin: 0 auto;
+            justify-content: flex-start; 
+            gap: 40px; 
+            padding: 25px 0; 
+            border-top: 1px solid #eee; 
+            margin-top: 20px;
         }
-        .category-text { 
+        .nav-item { 
             cursor: pointer; 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             font-weight: 700; 
             letter-spacing: 2px; 
+            color: #999; 
             transition: 0.3s;
-            color: #888;
-            padding-bottom: 5px;
         }
-        .category-text:hover, .category-text.active { 
-            color: #000;
-            border-bottom: 2px solid #000;
-        }
+        .nav-item:hover, .nav-item.active { color: #000; }
 
         /* Content Drawer */
-        #content-drawer { 
-            background: #fcfcfc; 
+        #work-drawer { 
+            background: #000; 
             max-height: 0; 
             overflow: hidden; 
             transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-bottom: 1px solid #eee;
+            border-radius: 12px;
+            margin-bottom: 50px;
         }
-        .drawer-inner { padding: 60px 20px; max-width: 1000px; margin: 0 auto; }
-        .tab-panel { display: none; opacity: 0; transition: opacity 0.4s; }
-        .tab-panel.show { display: block; opacity: 1; }
+        .drawer-inner { padding: 40px; color: #fff; }
+        .panel { display: none; opacity: 0; transition: opacity 0.4s; }
+        .panel.show { display: block; opacity: 1; }
 
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .gallery-grid img, .gallery-grid video {
-            width: 100%;
-            display: block;
-            border-radius: 4px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        img, video { width: 100%; border-radius: 6px; }
 
-        /* Footer Professional */
-        footer {
-            padding: 100px 20px;
-            text-align: center;
-            border-top: 1px solid #eee;
-            margin-top: 50px;
-        }
-        .copyright {
-            font-size: 0.7rem;
-            letter-spacing: 1px;
-            color: #999;
-            text-transform: uppercase;
-        }
+        /* Footer */
+        footer { padding: 60px 0; border-top: 1px solid #eee; text-align: center; }
+        .copy { font-size: 0.65rem; letter-spacing: 1.5px; color: #bbb; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
-    <header class="hero-section">
-        <h1 class="hero-title">rxhimislmn.</h1>
-        <p class="hero-subtitle">Videographer, Animator & Digital Artist</p>
-    </header>
-
-    <nav class="nav-categories">
-        <div class="category-text" onclick="toggleWork('video', this)">VIDEO</div>
-        <div class="category-text" onclick="toggleWork('photo', this)">PHOTO</div>
-        <div class="category-text" onclick="toggleWork('arts', this)">ARTS</div>
-        <div class="category-text" onclick="toggleWork('motion', this)">MOTION</div>
-    </nav>
-
-    <div id="content-drawer">
-        <div class="drawer-inner">
+    <div class="container">
+        <header class="header-section">
+            <h1 class="hero-title">rxhimislmn.</h1>
             
-            <div id="video" class="tab-panel">
-                <div class="gallery-grid">
-                    <video controls>
-                        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                    </video>
+            <div class="about-text-area">
+                <img src="resume rahimi (1).png" class="profile-pic" alt="Ahmad Rahimi">
+                
+                <div class="bio-content">
+                    <p>
+                        Saya <span class="name-bold">Ahmad Rahimi</span>, graduan Teknologi Kreatif (Pengajian Skrin & Pembuatan Filem) dari <span class="name-bold">Universiti Malaysia Kelantan (UMK)</span>. 
+                    </p>
+                    <p>
+                        Sebagai seorang peminat seni visual, saya aktif dalam bidang <span class="name-bold">Fotografi & Videografi Perkahwinan</span>. Selain merakam momen, saya juga pakar dalam suntingan video, gambar, dan penghasilan motion grafik asas.
+                    </p>
+                    <p>
+                        Minat saya terhadap penceritaan visual dan melukis memacu saya untuk terus berkarya dengan penuh dedikasi dalam setiap projek yang saya kendalikan.
+                    </p>
                 </div>
             </div>
 
-            <div id="photo" class="tab-panel">
-                <div class="gallery-grid">
-                    <img src="redonebuilding.png" alt="Photography">
+            <nav class="work-nav">
+                <div class="nav-item" onclick="openWork('vid', this)">VIDEO</div>
+                <div class="nav-item" onclick="openWork('pic', this)">PHOTO</div>
+                <div class="nav-item" onclick="openWork('art', this)">ARTS</div>
+                <div class="nav-item" onclick="openWork('mot', this)">MOTION</div>
+            </nav>
+        </header>
+
+        <div id="work-drawer">
+            <div class="drawer-inner">
+                
+                <div id="vid" class="panel">
+                    <video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
                 </div>
-            </div>
 
-            <div id="arts" class="tab-panel">
-                <div class="gallery-grid">
-                    <img src="nama-poster-anda.jpg" alt="Digital Arts">
+                <div id="pic" class="panel">
+                    <div class="grid">
+                        <img src="redonebuilding.png">
+                    </div>
                 </div>
-            </div>
 
-            <div id="motion" class="tab-panel">
-                <p style="text-align: center; color: #999; font-size: 0.8rem;">MOTION PROJECTS COMING SOON</p>
-            </div>
+                <div id="art" class="panel">
+                    <p style="text-align:center;">Koleksi Poster Digital</p>
+                </div>
 
+                <div id="mot" class="panel">
+                    <p style="text-align:center;">Motion Graphics Projects</p>
+                </div>
+
+            </div>
         </div>
+
+        <footer>
+            <div class="copy">© 2026 RXHIMISLMN. ALL RIGHTS RESERVED.</div>
+        </footer>
     </div>
 
-    <footer>
-        <div class="copyright">
-            © 2026 RXHIMISLMN. ALL RIGHTS RESERVED.
-        </div>
-    </footer>
-
     <script>
-        function toggleWork(id, element) {
-            const drawer = document.getElementById('content-drawer');
+        function openWork(id, btn) {
+            const drawer = document.getElementById('work-drawer');
             const target = document.getElementById(id);
-            const allPanels = document.querySelectorAll('.tab-panel');
-            const allBtns = document.querySelectorAll('.category-text');
+            const allPanels = document.querySelectorAll('.panel');
+            const allBtns = document.querySelectorAll('.nav-item');
 
-            // Jika klik pada yang sudah aktif, tutup drawer
-            if (element.classList.contains('active')) {
+            if (btn.classList.contains('active')) {
                 drawer.style.maxHeight = "0";
-                element.classList.remove('active');
+                btn.classList.remove('active');
                 setTimeout(() => { target.classList.remove('show'); }, 600);
-            } 
-            else {
-                // Reset semua
-                allBtns.forEach(btn => btn.classList.remove('active'));
-                allPanels.forEach(panel => panel.classList.remove('show'));
-
-                // Aktifkan yang baru
-                element.classList.add('active');
-                target.classList.add('show');
+            } else {
+                allBtns.forEach(b => b.classList.remove('active'));
+                allPanels.forEach(p => p.classList.remove('show'));
                 
-                // Buka laci (Auto height)
-                drawer.style.maxHeight = "2000px";
+                btn.classList.add('active');
+                target.classList.add('show');
+                drawer.style.maxHeight = "1500px";
             }
         }
     </script>

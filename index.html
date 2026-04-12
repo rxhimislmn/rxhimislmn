@@ -3,144 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>rxhimislmn | Creative Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>rxhimislmn | Creative Powerhouse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; color: #000; line-height: 1.8; }
+        :root { --bg: #ffffff; --text: #000000; }
+        * { box-sizing: border-box; cursor: none; } /* Kita guna custom cursor nanti */
         
-        /* Layout Utama */
-        .container { max-width: 800px; margin: 0 auto; padding: 0 25px; }
-
-        /* Header & About Me */
-        .header-section { padding: 100px 0 60px; text-align: left; }
-        .hero-title { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.5px; margin: 0 0 30px 0; }
-        
-        .about-text-area { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 50px; }
-        .profile-pic { width: 150px; height: 150px; border-radius: 15px; object-fit: cover; filter: grayscale(100%); }
-        .bio-content { flex: 1; min-width: 300px; }
-        .bio-content p { font-size: 0.95rem; color: #333; margin: 0 0 15px 0; }
-        .name-bold { font-weight: 700; color: #000; }
-
-        /* Navigation Kerja */
-        .work-nav { 
-            display: flex; 
-            justify-content: flex-start; 
-            gap: 40px; 
-            padding: 25px 0; 
-            border-top: 1px solid #eee; 
-            margin-top: 20px;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            transition: background 0.5s ease;
         }
+
+        /* CUSTOM CURSOR (Macam BikeBear) */
+        #cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(0,0,0,0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference; /* Warna cursor berubah ikut background */
+        }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 50px; }
+
+        /* HEADER SECTION */
+        header { padding: 120px 0 80px; }
+        .brand { font-size: 18px; font-weight: 900; letter-spacing: 2px; margin-bottom: 40px; }
+        
+        .huge-title { 
+            font-size: clamp(3.5rem, 10vw, 8rem); 
+            font-weight: 900; 
+            line-height: 0.85; 
+            letter-spacing: -5px; 
+            text-transform: uppercase;
+        }
+
+        /* ABOUT ME (STORY) */
+        .intro-section { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 100px; 
+            margin-bottom: 150px;
+            padding-top: 60px;
+            border-top: 10px solid #000;
+        }
+        
+        .intro-left h2 { font-size: 32px; font-weight: 900; text-transform: uppercase; }
+        .intro-right p { font-size: 1.4rem; line-height: 1.3; font-weight: 400; margin-bottom: 40px; }
+
+        /* WORK NAV (TABS) */
+        .work-nav { margin: 150px 0 30px; border-bottom: 2px solid #eee; }
         .nav-item { 
-            cursor: pointer; 
-            font-size: 0.7rem; 
-            font-weight: 700; 
-            letter-spacing: 2px; 
-            color: #999; 
-            transition: 0.3s;
+            font-size: clamp(2rem, 6vw, 5rem); 
+            font-weight: 900; 
+            color: #ddd; 
+            transition: 0.4s; 
+            display: inline-block; 
+            margin-right: 50px; 
+            text-transform: uppercase;
+            text-decoration: none;
+            padding-bottom: 10px;
         }
-        .nav-item:hover, .nav-item.active { color: #000; }
+        .nav-item:hover, .nav-item.active { color: #000; letter-spacing: 5px; }
 
-        /* Content Drawer */
-        #work-drawer { 
-            background: #000; 
+        /* DISPLAY BOX (DRAWER) */
+        #drawer { 
             max-height: 0; 
             overflow: hidden; 
-            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 12px;
-            margin-bottom: 50px;
+            transition: max-height 1s cubic-bezier(0.86, 0, 0.07, 1);
+            background: #000;
+            color: #fff;
         }
-        .drawer-inner { padding: 40px; color: #fff; }
-        .panel { display: none; opacity: 0; transition: opacity 0.4s; }
-        .panel.show { display: block; opacity: 1; }
+        .drawer-content { padding: 100px 50px; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-        img, video { width: 100%; border-radius: 6px; }
+        /* GALLERY */
+        .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        img, video { width: 100%; filter: grayscale(100%); transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+        img:hover, video:hover { filter: grayscale(0%); transform: scale(1.05); }
 
-        /* Footer */
-        footer { padding: 60px 0; border-top: 1px solid #eee; text-align: center; }
-        .copy { font-size: 0.65rem; letter-spacing: 1.5px; color: #bbb; text-transform: uppercase; }
+        /* FOOTER */
+        footer { 
+            padding: 100px 0; 
+            display: flex; 
+            justify-content: space-between;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 14px;
+            border-top: 10px solid #000;
+        }
+
+        @media (max-width: 768px) {
+            .intro-section { grid-template-columns: 1fr; gap: 50px; }
+            * { cursor: auto; } #cursor { display: none; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <header class="header-section">
-            <h1 class="hero-title">rxhimislmn.</h1>
-            
-            <div class="about-text-area">
-                <img src="resume rahimi (1).png" class="profile-pic" alt="Ahmad Rahimi">
-                
-                <div class="bio-content">
-                    <p>
-                        Saya <span class="name-bold">Ahmad Rahimi</span>, graduan Teknologi Kreatif (Pengajian Skrin & Pembuatan Filem) dari <span class="name-bold">Universiti Malaysia Kelantan (UMK)</span>. 
-                    </p>
-                    <p>
-                        Sebagai seorang peminat seni visual, saya aktif dalam bidang <span class="name-bold">Fotografi & Videografi Perkahwinan</span>. Selain merakam momen, saya juga pakar dalam suntingan video, gambar, dan penghasilan motion grafik asas.
-                    </p>
-                    <p>
-                        Minat saya terhadap penceritaan visual dan melukis memacu saya untuk terus berkarya dengan penuh dedikasi dalam setiap projek yang saya kendalikan.
-                    </p>
-                </div>
-            </div>
+    <div id="cursor"></div>
 
-            <nav class="work-nav">
-                <div class="nav-item" onclick="openWork('vid', this)">VIDEO</div>
-                <div class="nav-item" onclick="openWork('pic', this)">PHOTO</div>
-                <div class="nav-item" onclick="openWork('art', this)">ARTS</div>
-                <div class="nav-item" onclick="openWork('mot', this)">MOTION</div>
-            </nav>
+    <div class="container">
+        <header data-aos="fade-up">
+            <div class="brand">RXHIMISLMN.</div>
+            <h1 class="huge-title">CREATIVE<br>FORCE.</h1>
         </header>
 
-        <div id="work-drawer">
-            <div class="drawer-inner">
-                
-                <div id="vid" class="panel">
-                    <video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
-                </div>
-
-                <div id="pic" class="panel">
-                    <div class="grid">
-                        <img src="redonebuilding.png">
-                    </div>
-                </div>
-
-                <div id="art" class="panel">
-                    <p style="text-align:center;">Koleksi Poster Digital</p>
-                </div>
-
-                <div id="mot" class="panel">
-                    <p style="text-align:center;">Motion Graphics Projects</p>
-                </div>
-
+        <section class="intro-section" data-aos="fade-up" data-aos-delay="200">
+            <div class="intro-left">
+                <h2>Ahmad Rahimi</h2>
+                <p>Graduan Teknologi Kreatif UMK</p>
             </div>
-        </div>
+            <div class="intro-right">
+                <p>Lulusan Pengajian Skrin & Filem yang membawa magis ke dalam setiap frame fotografi, suntingan video, dan motion grafik.</p>
+                <p>Berasaskan dedikasi dan minat yang mendalam dalam seni visual.</p>
+            </div>
+        </section>
 
-        <footer>
-            <div class="copy">© 2026 RXHIMISLMN. ALL RIGHTS RESERVED.</div>
-        </footer>
-    </div>
-
-    <script>
-        function openWork(id, btn) {
-            const drawer = document.getElementById('work-drawer');
-            const target = document.getElementById(id);
-            const allPanels = document.querySelectorAll('.panel');
-            const allBtns = document.querySelectorAll('.nav-item');
-
-            if (btn.classList.contains('active')) {
-                drawer.style.maxHeight = "0";
-                btn.classList.remove('active');
-                setTimeout(() => { target.classList.remove('show'); }, 600);
-            } else {
-                allBtns.forEach(b => b.classList.remove('active'));
-                allPanels.forEach(p => p.classList.remove('show'));
-                
-                btn.classList.add('active');
-                target.classList.add('show');
-                drawer.style.maxHeight = "1500px";
-            }
-        }
-    </script>
-
-</body>
-</html>
+        <nav class="work-nav" data-aos="fade-up">
+            <a href="javascript:void(0)" class="nav-item" onclick="toggleWork('v',

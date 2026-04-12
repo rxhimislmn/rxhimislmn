@@ -4,145 +4,124 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>rxhimislmn | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <style>
-        /* Tambahan CSS untuk mencantikkan transition */
-        .category-btn {
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-            padding: 10px 20px;
-            border-radius: 12px;
-            min-width: 100px;
-        }
-        .category-btn:hover {
-            background: #f5f5f5;
-            transform: translateY(-3px);
-        }
-        .category-btn i {
-            font-size: 28px;
-            color: #000;
-            display: block;
-            margin-bottom: 12px;
-        }
-        .category-btn span {
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            color: #000;
-        }
-        #drawer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #111;
+        /* SAYA LETAK SEMUA STYLE KAT SINI SUPAYA TAK KACAU FAIL STYLE.CSS LAMA */
+        body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; }
+        .hero-section { text-align: center; padding: 60px 20px; }
+        .hero-title { font-size: 3rem; font-weight: 800; margin: 0; }
+        
+        .nav-container { display: flex; justify-content: center; gap: 50px; padding: 30px; border: 1px solid #eee; border-radius: 20px 20px 0 0; max-width: 900px; margin: 0 auto; }
+        
+        .icon-btn { cursor: pointer; text-align: center; transition: 0.3s; padding: 10px; min-width: 80px; }
+        .icon-btn i { font-size: 28px; display: block; margin-bottom: 10px; color: #000; }
+        .icon-btn span { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #000; }
+        .icon-btn:hover { transform: translateY(-5px); }
+
+        #black-drawer { 
+            background: #111; 
+            max-height: 0; 
+            overflow: hidden; 
+            transition: max-height 0.5s ease-out; 
+            max-width: 922px; 
+            margin: 0 auto; 
             border-radius: 0 0 20px 20px;
         }
-        .active-btn {
-            background: #f0f0f0;
-            border-bottom: 3px solid #000;
-        }
+        .content-padding { padding: 40px; color: white; }
+        .tab-content { display: none; text-align: center; }
+        
+        .work-grid { max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+        .card { background: #000; color: white; border-radius: 20px; overflow: hidden; padding: 20px; }
+        img, video { width: 100%; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">rxhim.</a>
-            <div class="nav-links">
-                <a href="#">Work</a>
-                <a href="#">About</a>
-                <a href="#">Contact</a>
-            </div>
+    <header class="hero-section">
+        <h1 class="hero-title">rxhimislmn.</h1>
+        <p>Videographer, Animator & Digital Artist</p>
+    </header>
+
+    <div class="nav-container">
+        <div class="icon-btn" onclick="openMe('vids')">
+            <i class="fa-solid fa-video"></i>
+            <span>VIDEO</span>
         </div>
-    </nav>
+        <div class="icon-btn" onclick="openMe('pics')">
+            <i class="fa-solid fa-camera"></i>
+            <span>PHOTO</span>
+        </div>
+        <div class="icon-btn" onclick="openMe('arts')">
+            <i class="fa-solid fa-palette"></i>
+            <span>ARTS</span>
+        </div>
+        <div class="icon-btn" onclick="openMe('mots')">
+            <i class="fa-solid fa-rocket"></i>
+            <span>MOTION</span>
+        </div>
+    </div>
 
-    <main class="main-container">
-        <header class="hero-section" style="margin-bottom: 60px;">
-            <h1 class="hero-title">rxhimislmn.</h1>
-            <p class="hero-subtitle">Videographer, Animator & Digital Artist berpangkalan di Malaysia.</p>
-        </header>
-
-        <section style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
-            <div style="display: flex; justify-content: space-around; align-items: center; background: white; padding: 30px 10px; border-radius: 20px 20px 0 0; border: 1px solid #eee; border-bottom: none; flex-wrap: wrap; gap: 20px;">
-                
-                <div class="category-btn" onclick="toggleTab('video-content', this)">
-                    <i class="fa-solid fa-video"></i>
-                    <span>VIDEO</span>
-                </div>
-
-                <div class="category-btn" onclick="toggleTab('photo-content', this)">
-                    <i class="fa-solid fa-camera"></i>
-                    <span>PHOTO</span>
-                </div>
-
-                <div class="category-btn" onclick="toggleTab('arts-content', this)">
-                    <i class="fa-solid fa-palette"></i>
-                    <span>ARTS</span>
-                </div>
-
-                <div class="category-btn" onclick="toggleTab('graphic-content', this)">
-                    <i class="fa-solid fa-rocket"></i>
-                    <span>MOTION</span>
-                </div>
+    <div id="black-drawer">
+        <div class="content-padding">
+            
+            <div id="vids" class="tab-content">
+                <h3>📽️ VIDEO WORKS</h3>
+                <video controls><source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4"></video>
             </div>
 
-            <div id="drawer">
-                <div style="padding: 50px 30px; color: white;">
-                    
-                    <div id="video-content" class="tab-item" style="display: none;">
-                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">📽️ VIDEO SHOWREEL</h3>
-                        <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-                            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                        </video>
-                    </div>
-
-                    <div id="photo-content" class="tab-item" style="display: none;">
-                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">📸 PHOTOGRAPHY</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                            <img src="redonebuilding.png" style="width: 100%; border-radius: 10px;">
-                        </div>
-                    </div>
-
-                    <div id="arts-content" class="tab-item" style="display: none;">
-                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">🎨 DIGITAL ARTS</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
-                            <img src="nama-poster-anda.jpg" style="width: 100%; border-radius: 10px;">
-                        </div>
-                    </div>
-
-                    <div id="graphic-content" class="tab-item" style="display: none;">
-                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">🚀 MOTION GRAPHICS</h3>
-                        <p style="text-align: center; color: #666;">Karya dalam proses kemaskini.</p>
-                    </div>
-
-                </div>
+            <div id="pics" class="tab-content">
+                <h3>📸 PHOTOGRAPHY</h3>
+                <img src="redonebuilding.png">
             </div>
-        </section>
 
-        <section class="work-grid" style="margin-top: 80px;">
-            <div class="work-card large bg-dark">
-                <div class="card-content">
-                    <span class="label">Featured Work</span>
-                    <h2>Showreel 2024</h2>
-                    <p>Himpunan karya terbaik videografi & animasi.</p>
-                </div>
-                <video autoplay loop muted playsinline class="card-media">
-                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                </video>
+            <div id="arts" class="tab-content">
+                <h3>🎨 DIGITAL ARTS</h3>
+                <img src="poster1.jpg"> 
             </div>
-        </section>
-    </main>
 
-    <footer style="padding: 60px 0; text-align: center; border-top: 1px solid #eee; margin-top: 100px;">
-        <p style="font-size: 12px; color: #999;">© 2024 RXHIMISLMN. ALL RIGHTS RESERVED.</p>
-    </footer>
+            <div id="mots" class="tab-content">
+                <h3>🚀 MOTION GRAPHICS</h3>
+                <p>Coming Soon...</p>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="work-grid">
+        <div class="card">
+            <p style="font-size: 12px; color: #888;">FEATURED WORK</p>
+            <h2>Showreel 2024</h2>
+            <video autoplay loop muted playsinline>
+                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            </video>
+        </div>
+    </section>
 
     <script>
-        function toggleTab(tabId, btn) {
-            const drawer = document.getElementById('drawer');
-            const targetTab = document.getElementById(tabId);
-            const allTabs = document.getElementsByClassName('tab-item');
-            const allBtns = document
+        function openMe(id) {
+            var drawer = document.getElementById('black-drawer');
+            var target = document.getElementById(id);
+            var all = document.getElementsByClassName('tab-content');
+
+            // Kalau tab tu dah terbuka, kita tutup laci
+            if (target.style.display === "block") {
+                drawer.style.maxHeight = "0";
+                setTimeout(function(){ target.style.display = "none"; }, 500);
+            } 
+            // Kalau belum terbuka
+            else {
+                // Sembunyikan semua content dulu
+                for (var i = 0; i < all.length; i++) {
+                    all[i].style.display = "none";
+                }
+                // Tunjukkan content yang kita nak
+                target.style.display = "block";
+                // Buka laci
+                drawer.style.maxHeight = "1000px";
+            }
+        }
+    </script>
+
+</body>
+</html>

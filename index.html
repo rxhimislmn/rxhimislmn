@@ -7,6 +7,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Tambahan CSS untuk mencantikkan transition */
+        .category-btn {
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 12px;
+            min-width: 100px;
+        }
+        .category-btn:hover {
+            background: #f5f5f5;
+            transform: translateY(-3px);
+        }
+        .category-btn i {
+            font-size: 28px;
+            color: #000;
+            display: block;
+            margin-bottom: 12px;
+        }
+        .category-btn span {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #000;
+        }
+        #drawer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #111;
+            border-radius: 0 0 20px 20px;
+        }
+        .active-btn {
+            background: #f0f0f0;
+            border-bottom: 3px solid #000;
+        }
+    </style>
 </head>
 <body>
 
@@ -22,69 +60,69 @@
     </nav>
 
     <main class="main-container">
-        <header class="hero-section">
+        <header class="hero-section" style="margin-bottom: 60px;">
             <h1 class="hero-title">rxhimislmn.</h1>
             <p class="hero-subtitle">Videographer, Animator & Digital Artist berpangkalan di Malaysia.</p>
         </header>
 
-        <section style="max-width: 1000px; margin: 40px auto 0; padding: 0 20px;">
-            <div style="display: flex; justify-content: center; gap: 40px; background: white; padding: 25px; border-radius: 20px 20px 0 0; border: 1px solid #eee; border-bottom: none; flex-wrap: wrap;">
+        <section style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; background: white; padding: 30px 10px; border-radius: 20px 20px 0 0; border: 1px solid #eee; border-bottom: none; flex-wrap: wrap; gap: 20px;">
                 
-                <div onclick="openTab('video-content')" style="cursor: pointer; text-align: center; min-width: 80px;">
-                    <i class="fa-solid fa-video" style="font-size: 28px; color: #000;"></i>
-                    <span style="font-size: 10px; font-weight: 800; display: block; margin-top: 10px; letter-spacing: 1px;">VIDEO</span>
+                <div class="category-btn" onclick="toggleTab('video-content', this)">
+                    <i class="fa-solid fa-video"></i>
+                    <span>VIDEO</span>
                 </div>
 
-                <div onclick="openTab('photo-content')" style="cursor: pointer; text-align: center; min-width: 80px;">
-                    <i class="fa-solid fa-camera" style="font-size: 28px; color: #000;"></i>
-                    <span style="font-size: 10px; font-weight: 800; display: block; margin-top: 10px; letter-spacing: 1px;">PHOTO</span>
+                <div class="category-btn" onclick="toggleTab('photo-content', this)">
+                    <i class="fa-solid fa-camera"></i>
+                    <span>PHOTO</span>
                 </div>
 
-                <div onclick="openTab('arts-content')" style="cursor: pointer; text-align: center; min-width: 80px;">
-                    <i class="fa-solid fa-fill-drip" style="font-size: 28px; color: #000;"></i>
-                    <span style="font-size: 10px; font-weight: 800; display: block; margin-top: 10px; letter-spacing: 1px;">ARTS</span>
+                <div class="category-btn" onclick="toggleTab('arts-content', this)">
+                    <i class="fa-solid fa-palette"></i>
+                    <span>ARTS</span>
                 </div>
 
-                <div onclick="openTab('graphic-content')" style="cursor: pointer; text-align: center; min-width: 80px;">
-                    <i class="fa-solid fa-rocket" style="font-size: 28px; color: #000;"></i>
-                    <span style="font-size: 10px; font-weight: 800; display: block; margin-top: 10px; letter-spacing: 1px; line-height: 1.1;">MOTION<br>GRAPHIC</span>
+                <div class="category-btn" onclick="toggleTab('graphic-content', this)">
+                    <i class="fa-solid fa-rocket"></i>
+                    <span>MOTION</span>
                 </div>
             </div>
 
-            <div id="drawer" style="background: #111; color: white; border-radius: 0 0 20px 20px; padding: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease; border: 1px solid #eee; border-top: none;">
-                <div style="padding: 40px;">
+            <div id="drawer">
+                <div style="padding: 50px 30px; color: white;">
                     
                     <div id="video-content" class="tab-item" style="display: none;">
-                        <h3 style="margin-bottom: 20px; text-align: center;">📽️ Video Showreel</h3>
-                        <video controls style="width: 100%; border-radius: 10px;">
+                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">📽️ VIDEO SHOWREEL</h3>
+                        <video controls style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
                             <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                         </video>
                     </div>
 
                     <div id="photo-content" class="tab-item" style="display: none;">
-                        <h3 style="margin-bottom: 20px; text-align: center;">📸 Photography</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <img src="redonebuilding.png" style="width: 100%; border-radius: 8px;">
+                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">📸 PHOTOGRAPHY</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                            <img src="redonebuilding.png" style="width: 100%; border-radius: 10px;">
                         </div>
                     </div>
 
                     <div id="arts-content" class="tab-item" style="display: none;">
-                        <h3 style="margin-bottom: 20px; text-align: center;">🎨 Digital Arts & Posters</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                            <img src="nama-poster-anda.jpg" style="width: 100%; border-radius: 8px;">
-                            </div>
+                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">🎨 DIGITAL ARTS</h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                            <img src="nama-poster-anda.jpg" style="width: 100%; border-radius: 10px;">
+                        </div>
                     </div>
 
                     <div id="graphic-content" class="tab-item" style="display: none;">
-                        <h3 style="margin-bottom: 20px; text-align: center;">🚀 Motion Graphics</h3>
-                        <p style="text-align: center; color: #888;">Koleksi motion graphic akan menyusul.</p>
+                        <h3 style="text-align: center; margin-bottom: 30px; letter-spacing: 2px;">🚀 MOTION GRAPHICS</h3>
+                        <p style="text-align: center; color: #666;">Karya dalam proses kemaskini.</p>
                     </div>
 
                 </div>
             </div>
         </section>
 
-        <section class="work-grid">
+        <section class="work-grid" style="margin-top: 80px;">
             <div class="work-card large bg-dark">
                 <div class="card-content">
                     <span class="label">Featured Work</span>
@@ -98,28 +136,13 @@
         </section>
     </main>
 
-    <footer>
-        <p>© 2024 rxhimislmn. Built with precision.</p>
+    <footer style="padding: 60px 0; text-align: center; border-top: 1px solid #eee; margin-top: 100px;">
+        <p style="font-size: 12px; color: #999;">© 2024 RXHIMISLMN. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
-        function openTab(tabId) {
+        function toggleTab(tabId, btn) {
             const drawer = document.getElementById('drawer');
-            const tabs = document.getElementsByClassName('tab-item');
-            
-            // Sembunyikan semua tab
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].style.display = 'none';
-            }
-
-            // Tunjukkan tab yang dipilih
-            document.getElementById(tabId).style.display = 'block';
-
-            // Buka laci hitam
-            drawer.style.maxHeight = "1000px";
-            drawer.style.marginBottom = "40px";
-        }
-    </script>
-
-</body>
-</html>
+            const targetTab = document.getElementById(tabId);
+            const allTabs = document.getElementsByClassName('tab-item');
+            const allBtns = document
